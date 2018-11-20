@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"> 
+        <link rel="stylesheet" href="./css/main.css" />
+    </head>
+    <body>
+        <div class="row01">
+            <canvas id="systemCanvas" class="canvas systemCanvas" oncontextmenu="return false;"></canvas>
+            <canvas id="backCanvas" class="canvas backCanvas" ></canvas>
+            <canvas id="frontCanvas" class="canvas frontCanvas" ></canvas>
+        </div>
+        <script src="./js/Mouse.js"></script>
+        <script src="./js/CharacterManager.js"></script>
+        <script src="./js/CharacterBase.js"></script>
+        <script src="./js/Circle.js"></script>
+        <script src="./js/Maruo.js"></script>
+        <script src="./js/MaruoRed.js"></script>
+        <script src="./js/Laser.js"></script>
+        <script src="./js/StateBase.js"></script>
+        <script src="./js/CharacterState.js"></script>
+        <script src="./js/TitleState.js"></script>
+        <script src="./js/CircleState.js"></script>
+        <script src="./js/RectState.js"></script>
+        <script src="./js/main.js"></script>
+        <script>
+            // main.jsの初期化メソッドを呼び出し、アプリを開始する
+            window.addEventListener("load", init, false);
+        </script>
+    </body>
+</html>
