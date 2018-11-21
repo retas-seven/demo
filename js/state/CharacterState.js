@@ -58,12 +58,12 @@ class CharacterState extends StateBase {
         };
         this.bgImg.src = "./img/bg01.jpg";
 
-        // 背景色を設定
-        let grd = back.createLinearGradient(0, 0, 0, WIDTH);
-        grd.addColorStop(0, 'rgb(0, 0, 15)');
-        grd.addColorStop(1, 'rgb(80, 80, 230)');
-        back.fillStyle = grd;
-        back.fillRect(0, 0, WIDTH, HEIGHT);
+        // // 背景色を設定
+        // let grd = back.createLinearGradient(0, 0, 0, WIDTH);
+        // grd.addColorStop(0, 'rgb(0, 0, 15)');
+        // grd.addColorStop(1, 'rgb(80, 80, 230)');
+        // back.fillStyle = grd;
+        // back.fillRect(0, 0, WIDTH, HEIGHT);
 
     }
 

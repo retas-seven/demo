@@ -101,7 +101,7 @@ function blackFadeIn(callback) {
     systemAlpha = 0;
 }
 
-function systemFunc(callbackFunc) {
+function systemFunc() {
     if (isSystemBlack) {
         systemAlpha += 0.1;
         system.globalAlpha = systemAlpha;
