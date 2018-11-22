@@ -21,6 +21,7 @@ class TitleState extends StateBase {
      * 描画
      */
     draw() {
+        // TODO:文字の中央寄せ
         front.font = "bold 50px 'Arial'";
         front.fillStyle = "#ffffff";
         front.fillText("MARUO Shooting", 155,200);

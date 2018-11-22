@@ -18,6 +18,8 @@ var state;
 var _loopStartMsc;
 /** 描画タイミング調整用の変数：ループ終了時の時間（ミリ秒） */
 var _loopEndMsc;
+/** ゲーム内の共有データ */
+var shareData;
 
 var isSystemBlack = false;
 var systemAlpha = 0;
@@ -48,6 +50,9 @@ function init() {
     systemCanvas.addEventListener("click", mouse.leftClick, false);
     systemCanvas.addEventListener("contextmenu", mouse.rightClick, false);
 
+    // 共有データを初期化 
+    shareData = {};
+
     // 初期画面を設定
     // state = new CircleState();
     // state = new CharacterState();
@@ -65,10 +70,10 @@ function init() {
 function mainLoop() {
     _loopStartMsc = Date.now();
     
-    if (FRAME_MSEC < (_loopStartMsc - _loopEndMsc)) {
-
-        systemFunc();
-
+    if (FRAME_MSEC < (_loopStartMsc - _loopEndMsc) && state.isReady) {
+		
+    	//systemFunc();
+    	
         // 検知したマウスイベントをマウスオブジェクトに反映
         mouse.update();
         // 画面を初期化
@@ -79,13 +84,15 @@ function mainLoop() {
         state.draw();
         // 検知したマウスイベントを無効化
         mouse.reset();
+    	
+    	systemFunc();
 
         // 描画間隔調整のための処理
         _loopEndMsc = _loopStartMsc;
     }
-    if (state.isReady) {
-        execMainLoop();
-    }
+    //if (state.isReady) {
+    execMainLoop();
+    //}
 }
 
 /**

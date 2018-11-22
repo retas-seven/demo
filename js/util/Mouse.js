@@ -26,7 +26,7 @@ class Mouse {
         mouse._x = e.offsetX;
         mouse._y = e.offsetY;
         mouse._isLeft = true;
-        console.log(mouse._x + ", " + mouse._y);
+//      console.log(mouse._x + ", " + mouse._y);
     }
 
     /**

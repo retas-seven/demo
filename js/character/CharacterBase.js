@@ -11,6 +11,7 @@ class CharacterBase {
         this.width = width;
         this.height = height;
         this.isEnd = false;
+        this.clickEnable = true;
     }
 
     draw() {
@@ -26,6 +27,10 @@ class CharacterBase {
     }
 
     rightClick() {
+
+    }
+
+    destroyProcess() {
 
     }
 }

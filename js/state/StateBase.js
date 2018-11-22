@@ -6,6 +6,7 @@ class StateBase {
      * 初期化
      */
     constructor() {
+    	back.clearRect(0, 0, WIDTH, HEIGHT);
         this.cm = new CharacterManager();
         this._isChangeStateEnd = false;
         this.isReady = false;

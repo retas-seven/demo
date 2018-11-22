@@ -71,7 +71,7 @@ class CharacterManager {
         // 左クリックイベントの処理
         if (mouse.isLeft) {
             for (let c of this.characterList) {
-                if (c.x <= mouse.x && mouse.x <= (c.x + c.width) && c.y <= mouse.y && mouse.y <= (c.y + c.height)) {
+                if (c.clickEnable && c.x <= mouse.x && mouse.x <= (c.x + c.width) && c.y <= mouse.y && mouse.y <= (c.y + c.height)) {
                     c.leftClick();
                 }
             }
@@ -80,7 +80,7 @@ class CharacterManager {
         // 右クリックイベントの処理
         if (mouse.isRight) {
             for (let c of this.characterList) {
-                if (c.x <= mouse.x && mouse.x <= (c.x + c.width) && c.y <= mouse.y && mouse.y <= (c.y + c.height)) {
+                if (c.clickEnable && c.x <= mouse.x && mouse.x <= (c.x + c.width) && c.y <= mouse.y && mouse.y <= (c.y + c.height)) {
                     c.rightClick();
                 }
             }

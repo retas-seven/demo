@@ -27,11 +27,11 @@ class Maruo extends CharacterBase {
         return 1;
     }
     /** 状態：やられ */
-    static get STATUS_EXPLOSION() {
+    static get STATUS_DESTROY() {
         return 2;
     }
     /** やられ状態の表示フレーム数 */
-    static get EXPLOSION_FRM() {
+    static get DESTROY_FRAME() {
         return 8;
     }
 
@@ -47,7 +47,7 @@ class Maruo extends CharacterBase {
         this.frameCnt = 0;
         this.status = Maruo.STATUS_NORMAL;
         this.isReachedLeftEnd = false;
-        this.explosionFrameCnt = 0;
+        this.destroyFrameCnt = 0;
     }
 
     /**
@@ -56,7 +56,7 @@ class Maruo extends CharacterBase {
     run() {
         if (Maruo.STATUS_NORMAL == this.status) {
             this.runNormal();
-        } else if (Maruo.STATUS_EXPLOSION == this.status) {
+        } else if (Maruo.STATUS_DESTROY == this.status) {
             this.runExplosion();
         }
     }
@@ -107,10 +107,10 @@ class Maruo extends CharacterBase {
      * やられ状態の状態更新
      */
     runExplosion() {
-        if (Maruo.EXPLOSION_FRM <= this.explosionFrameCnt) {
+        if (Maruo.DESTROY_FRAME <= this.destroyFrameCnt) {
             this.isEnd = true;
         } else {
-            this.explosionFrameCnt++;
+            this.destroyFrameCnt++;
             this.x++;
             this.y--;
         }
@@ -126,7 +126,7 @@ class Maruo extends CharacterBase {
                 , this.x
                 , this.y
             );
-        } else if (Maruo.STATUS_EXPLOSION == this.status) {
+        } else if (Maruo.STATUS_DESTROY == this.status) {
             front.drawImage(
                 state.cm.characterImageMap.get(Maruo.EXPLOSION_IMAGE_NAME[0])
                 , this.x
@@ -140,6 +140,8 @@ class Maruo extends CharacterBase {
      * 左クリック時の処理
      */
     leftClick() {
-        this.status = Maruo.STATUS_EXPLOSION;
+        this.status = Maruo.STATUS_DESTROY;
+        this.clickEnable = false;
+        this.destroyProcess();
     }
 }

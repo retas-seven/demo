@@ -1,5 +1,5 @@
 /**
- * サンプル画面（キャラクタ）
+ * ゲーム画面
  */
 class CharacterState extends StateBase {
     constructor() {
@@ -7,6 +7,9 @@ class CharacterState extends StateBase {
         this.bgImg = new Image();
         this.characterImgLoadComplete = false;
         this.bgImgLoadComplete = false;
+
+        shareData.maruoDestroyCnt = 0;
+        shareData.maruoRedDestroyCnt = 0;
     }
 
     /**
@@ -19,10 +22,10 @@ class CharacterState extends StateBase {
                 this.characterImgLoadComplete = true;
                 if (this.bgImgLoadComplete) {
                     this.isReady = true;
-                    execMainLoop();
+                    //execMainLoop();
                 }
-                this.isReady = true;
-                execMainLoop();
+                //this.isReady = true;
+                //execMainLoop();
             }
             , Maruo.IMAGE_NAME
             , Maruo.EXPLOSION_IMAGE_NAME
@@ -30,21 +33,36 @@ class CharacterState extends StateBase {
             , MaruoRed.EXPLOSION_IMAGE_NAME
         );
 
-        // 描画するキャラクタを作成
-        for (let i = 0; i < 45; i++) {
-            this.cm.add(new Maruo(
+        // まるおを生成
+        for (let i = 0; i < 65; i++) {
+            let maruo = new Maruo(
                 Math.random() * 1000 + WIDTH 
                 , Math.random() * HEIGHT - Maruo.HEIGHT
                 , Math.random() * -5 - 1
-                , Math.random() * -5 - 1));
+                , Math.random() * -5 - 1
+            );
+
+            maruo.destroyProcess = () => {
+                shareData.maruoDestroyCnt++;
+            }
+            
+            this.cm.add(maruo);
         }
 
-        for (let i = 0; i < 8; i++) {
-            this.cm.add(new MaruoRed(
+        // 赤まるおを生成
+        for (let i = 0; i < 35; i++) {
+            let maruoRed = new MaruoRed(
                 Math.random() * 1000 + WIDTH 
                 , Math.random() * HEIGHT - MaruoRed.HEIGHT
                 , Math.random() * -7 - 4
-                , Math.random() * -7 - 4));
+                , Math.random() * -7 - 4
+            );
+
+            maruoRed.destroyProcess = () => {
+                shareData.maruoRedDestroyCnt++;
+            }
+            
+            this.cm.add(maruoRed);
         }
 
         // 背景画像を設定
@@ -53,7 +71,7 @@ class CharacterState extends StateBase {
             back.drawImage(this.bgImg, 0, 0);
             if (this.characterImgLoadComplete) {
                 this.isReady = true;
-                execMainLoop();
+                //execMainLoop();
             }
         };
         this.bgImg.src = "./img/bg01.jpg";
@@ -81,8 +99,7 @@ class CharacterState extends StateBase {
         this.cm.run();
 
         if (this.cm.characterList.length == 0) {
-            // this.changeState("CircleState");
-            this.changeState("CharacterState");
+            this.changeState("ResultState");
         }
 
         if (mouse.isLeft) {
