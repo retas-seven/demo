@@ -71,9 +71,7 @@ function mainLoop() {
     _loopStartMsc = Date.now();
     
     if (FRAME_MSEC < (_loopStartMsc - _loopEndMsc) && state.isReady) {
-		
-    	//systemFunc();
-    	
+
         // 検知したマウスイベントをマウスオブジェクトに反映
         mouse.update();
         // 画面を初期化
@@ -90,9 +88,8 @@ function mainLoop() {
         // 描画間隔調整のための処理
         _loopEndMsc = _loopStartMsc;
     }
-    //if (state.isReady) {
+    
     execMainLoop();
-    //}
 }
 
 /**

@@ -33,7 +33,7 @@ class TitleState extends StateBase {
      * 状態を更新
      */
     run() {
-        if (mouse.isLeft) {
+        if (mouse.isLeft || mouse.isRight) {
             this.changeState("CharacterState");
         }
     }

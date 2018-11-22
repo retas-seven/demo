@@ -21,7 +21,6 @@ class ResultState extends StateBase {
 				this.loadCompleteImgCnt++;
 	            if (this.loadCompleteImgCnt == Object.keys(this.iconImg).length) {
 	                this.isReady = true;
-	                //execMainLoop();
 	            }
 			}
 		}
@@ -58,6 +57,10 @@ class ResultState extends StateBase {
         front.fillText(":", 480, 231);
         front.fillText(shareData.maruoRedDestroyCnt, 315, 233);
         front.fillText(shareData.maruoDestroyCnt, 515, 233);
+
+        front.font = "bold 17px 'Arial'";
+        front.fillText("left click - RETRY", 60,370);
+        front.fillText("right click - TITLE", 515,370);
     }
 
     /**
@@ -66,6 +69,9 @@ class ResultState extends StateBase {
     run() {
         if (mouse.isLeft) {
             this.changeState("CharacterState");
+        }
+        if (mouse.isRight) {
+            this.changeState("TitleState");
         }
     }
 }

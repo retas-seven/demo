@@ -6,10 +6,8 @@ body {
 }
 .row01 {
     position: relative;
-    /*border: solid 1px;*/
     width: 1000px;
     height: 600px;
-    /*background-color: white;*/
 }
 .canvas {
     position: absolute;
