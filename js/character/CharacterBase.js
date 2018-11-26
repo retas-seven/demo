@@ -12,6 +12,7 @@ class CharacterBase {
         this.height = height;
         this.isEnd = false;
         this.clickEnable = true;
+        this.elapseFrm = 0;
     }
 
     draw() {

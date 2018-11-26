@@ -3,11 +3,11 @@
  */
 class MaruoRed extends CharacterBase {
     /** 使用する画像名（通常） */
-    static get IMAGE_NAME() {
+    static get NORMAL_IMAGE_NAME() {
         return ["./img/maruo_red_1.png", "./img/maruo_red_2.png","./img/maruo_red_3.png"];
     }
     /** 使用する画像名（やられ） */
-    static get EXPLOSION_IMAGE_NAME() {
+    static get DESTROY_IMAGE_NAME() {
         return ["./img/maruo_red_yarare.png"];
     }
     /** １つの画像を表示するフレーム数 */
@@ -44,10 +44,9 @@ class MaruoRed extends CharacterBase {
         this.dy = dy;
         this.boundCnt = 0;
         this.imgIndex = 0;
-        this.frameCnt = 0;
         this.status = MaruoRed.STATUS_NORMAL;
         this.isReachedLeftEnd = false;
-        this.destroyFrameCnt = 0;
+        this.destroyEelapseFrm = 0;
     }
 
     /**
@@ -98,19 +97,17 @@ class MaruoRed extends CharacterBase {
         }
 
         // 描画する画像のインデックス調整
-        this.imgIndex = Math.floor((this.frameCnt % (MaruoRed.IMAGE_NAME.length * MaruoRed.DRAW_FRAME)) / MaruoRed.DRAW_FRAME);
-
-        this.frameCnt++;
+        this.imgIndex = Math.floor((this.elapseFrm % (MaruoRed.NORMAL_IMAGE_NAME.length * MaruoRed.DRAW_FRAME)) / MaruoRed.DRAW_FRAME);
     }
 
     /**
      * やられ状態の状態更新
      */
     runExplosion() {
-        if (MaruoRed.DESTROY_FRAME <= this.destroyFrameCnt) {
+        if (MaruoRed.DESTROY_FRAME <= this.destroyEelapseFrm) {
             this.isEnd = true;
         } else {
-            this.destroyFrameCnt++;
+            this.destroyEelapseFrm++;
             this.x++;
             this.y--;
         }
@@ -122,13 +119,13 @@ class MaruoRed extends CharacterBase {
     draw() {
         if (MaruoRed.STATUS_NORMAL == this.status) {
             front.drawImage(
-                state.cm.characterImageMap.get(MaruoRed.IMAGE_NAME[this.imgIndex])
+                state.im.imageMap.get(MaruoRed.NORMAL_IMAGE_NAME[this.imgIndex])
                 , this.x
                 , this.y
             );
         } else if (MaruoRed.STATUS_DESTROY == this.status) {
             front.drawImage(
-                state.cm.characterImageMap.get(MaruoRed.EXPLOSION_IMAGE_NAME[0])
+                state.im.imageMap.get(MaruoRed.DESTROY_IMAGE_NAME[0])
                 , this.x
                 , this.y
             );

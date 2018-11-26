@@ -8,43 +8,6 @@ class CharacterManager {
     constructor() {
         // ステートに登場するキャラクタを管理する配列
         this.characterList = [];
-        // ステートで使用するイメージを格納するMap
-        this.characterImageMap = new Map();
-
-        this.useImageCnt = 0;
-        this.loadCompleteImageCnt = 0;
-        this.isLoadImgComplete = false;
-    }
-
-    /**
-     * 使用するイメージを読み込む
-     */
-    loadImage(callback, ...imgNameAry) {
-        let allImgAry = [];
-        let uniqueImgAry = [];
-
-        for (let IndividualImgNameAry of imgNameAry) {
-            allImgAry.push(...IndividualImgNameAry);
-        }
-
-        uniqueImgAry = Array.from(new Set(allImgAry));
-        this.useImageCnt = uniqueImgAry.length;
-
-        for (let imgName of uniqueImgAry) {
-            let img = new Image() ;
-            img.onload = () => {
-                this.loadCompleteImageCnt++;
-                console.log("loadCompleteImageCnt:" + this.loadCompleteImageCnt);
-
-                if (this.loadCompleteImageCnt == this.useImageCnt) {
-                    this.isLoadImgComplete = true;
-                    console.log("isLoadImgComplete:" + this.isLoadImgComplete);
-                    callback();
-                }
-            };
-            img.src = imgName;
-            this.characterImageMap.set(imgName, img);
-        }
     }
 
     /**
@@ -90,10 +53,12 @@ class CharacterManager {
         for (let i = 0; i < this.characterList.length; i++) {
             this.characterList[i].run();
 
-            // 終了フラグが立っている場合は配列から取り除く
             if (this.characterList[i].isEnd) {
+                // 終了フラグが立っている場合は配列から取り除く
                 this.characterList.splice(i, 1);
                 i--;
+            } else {
+                this.characterList[i].elapseFrm++;
             }
         }
     }

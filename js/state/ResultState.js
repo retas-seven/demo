@@ -2,31 +2,32 @@
  * 結果表示画面
  */
 class ResultState extends StateBase {
+    /** 赤まるおアイコン画像名 */
+    static get MARUO_RED_ICON_NAME() {
+        return "./img/maruo_red_3.png";
+    }
+    /** まるおアイコン画像名 */
+    static get MARUO_ICON_NAME() {
+        return "./img/maruo_3.png";
+    }
+
+    /**
+     * コンストラクタ
+     */
     constructor() {
         super();
-    	this.loadCompleteImgCnt = 0;
-    	this.iconImg = {
-    		maruoImg: new Image()
-    		, maruoRedImg: new Image()
-    	}
     }
 
     /**
      * 初期化
      */
     init () {
-        // 使用画像を読み込む
-		for (let img of Object.values(this.iconImg)) {
-			img.onload = () => {
-				this.loadCompleteImgCnt++;
-	            if (this.loadCompleteImgCnt == Object.keys(this.iconImg).length) {
-	                this.isReady = true;
-	            }
-			}
-		}
-    	
-        this.iconImg.maruoImg.src = "./img/maruo_3.png";
-        this.iconImg.maruoRedImg.src = "./img/maruo_red_3.png";
+        // 使用する画像を読み込む
+        this.im.loadImage (
+            () => {}
+            , ResultState.MARUO_RED_ICON_NAME
+            , ResultState.MARUO_ICON_NAME
+        );
     }
 
     /**
@@ -35,14 +36,14 @@ class ResultState extends StateBase {
     draw() {
         // 赤まるおのアイコンを表示
         front.drawImage(
-            this.iconImg.maruoRedImg
+            this.im.imageMap.get(ResultState.MARUO_RED_ICON_NAME)
             , 200
             , 200
         );
 
         // まるおのアイコンを表示
         front.drawImage(
-            this.iconImg.maruoImg
+            this.im.imageMap.get(ResultState.MARUO_ICON_NAME)
             , 400
             , 200
         );

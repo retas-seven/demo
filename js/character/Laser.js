@@ -28,16 +28,12 @@ class Laser extends CharacterBase {
         this.g = 100;
         this.b = 0;
         this.a = 1.0;
-
-        // 経過フレーム
-        this.frm = 0;
     }
 
     run() {
-        if (Laser.TOTAL_FRAME < this.frm) {
+        if (Laser.TOTAL_FRAME < this.elapseFrm) {
             this.isEnd = true;
         }
-        this.frm++;
     }
 
     draw() {
@@ -47,12 +43,12 @@ class Laser extends CharacterBase {
         front.beginPath();
         front.moveTo(this.x - 1, this.y);
         front.lineTo(
-            this.x - ((this.x - this.lX) / this.frm)
-            , this.y + ((this.lY - this.y) / this.frm)
+            this.x - ((this.x - this.lX) / this.elapseFrm)
+            , this.y + ((this.lY - this.y) / this.elapseFrm)
         );
         front.lineTo(
-            this.x - ((this.x - this.lX) / this.frm)
-            , this.y + ((this.lY - this.y) / this.frm) + (15 / this.frm)
+            this.x - ((this.x - this.lX) / this.elapseFrm)
+            , this.y + ((this.lY - this.y) / this.elapseFrm) + (15 / this.elapseFrm)
         );
         front.closePath();
         front.fill();
@@ -61,12 +57,12 @@ class Laser extends CharacterBase {
         front.beginPath();
         front.moveTo(this.x + 1, this.y);
         front.lineTo(
-            this.x + ((this.rX - this.x) / this.frm)
-            , this.y + ((this.rY - this.y) / this.frm)
+            this.x + ((this.rX - this.x) / this.elapseFrm)
+            , this.y + ((this.rY - this.y) / this.elapseFrm)
         );
         front.lineTo(
-            this.x + ((this.rX - this.x) / this.frm)
-            , this.y + ((this.rY - this.y) / this.frm) + (15 / this.frm)
+            this.x + ((this.rX - this.x) / this.elapseFrm)
+            , this.y + ((this.rY - this.y) / this.elapseFrm) + (15 / this.elapseFrm)
         );
         front.closePath();
         front.fill();

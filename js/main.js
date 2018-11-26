@@ -70,7 +70,7 @@ function init() {
 function mainLoop() {
     _loopStartMsc = Date.now();
     
-    if (FRAME_MSEC < (_loopStartMsc - _loopEndMsc) && state.isReady) {
+    if (FRAME_MSEC < (_loopStartMsc - _loopEndMsc) && state.im.isLoadImgComplete) {
 
         // 検知したマウスイベントをマウスオブジェクトに反映
         mouse.update();

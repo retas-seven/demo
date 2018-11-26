@@ -8,8 +8,8 @@ class StateBase {
     constructor() {
     	back.clearRect(0, 0, WIDTH, HEIGHT);
         this.cm = new CharacterManager();
+        this.im = new ImageManager();
         this._isChangeStateEnd = false;
-        this.isReady = false;
     }
 
     changeState(stateName) {
