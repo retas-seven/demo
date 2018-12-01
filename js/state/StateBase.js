@@ -24,4 +24,26 @@ class StateBase {
             this._isChangeStateEnd = true;
         }
     }
+
+    baseRun() {
+        this.cm.run();
+        this.run();
+    }
+
+    baseScheduleCheck() {
+        this.cm.scheduleCheck();
+    }
+
+    baseDraw() {
+        this.cm.draw();
+        this.draw();
+    }
+
+    baseAfterProcess() {
+        this.cm.updateElapseFrm();
+    }
+
+    // 以下、派生クラスにて必要に応じてオーバーライドするメソッド
+    draw() {}
+    run() {}
 }

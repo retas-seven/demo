@@ -8,7 +8,7 @@ class Maruo extends CharacterBase {
     }
     /** 使用する画像名（やられ） */
     static get DESTROY_IMAGE_NAME() {
-        return ["./img/maruo_yarare.png"];
+        return "./img/maruo_yarare.png";
     }
     /** １つの画像を表示するフレーム数 */
     static get DRAW_FRAME() {
@@ -125,7 +125,7 @@ class Maruo extends CharacterBase {
             );
         } else if (Maruo.STATUS_DESTROY == this.status) {
             front.drawImage(
-                state.im.imageMap.get(Maruo.DESTROY_IMAGE_NAME[0])
+                state.im.imageMap.get(Maruo.DESTROY_IMAGE_NAME)
                 , this.x
                 , this.y
             );

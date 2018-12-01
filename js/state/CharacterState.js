@@ -12,14 +12,16 @@ class CharacterState extends StateBase {
      */
     constructor() {
         super();
-        shareData.maruoDestroyCnt = 0;
-        shareData.maruoRedDestroyCnt = 0;
     }
 
     /**
      * 初期化
      */
     init () {
+        // 共有データのまるおは回数をリセット
+        shareData.maruoDestroyCnt = 0;
+        shareData.maruoRedDestroyCnt = 0;
+
         // 使用する画像を読み込む
         this.im.loadImage (
             () => {
@@ -32,23 +34,7 @@ class CharacterState extends StateBase {
             , MaruoRed.DESTROY_IMAGE_NAME
             , CharacterState.BG_NAME
         );
-
-        // まるおを生成
-        for (let i = 0; i < 65; i++) {
-            let maruo = new Maruo(
-                Math.random() * 1000 + WIDTH 
-                , Math.random() * HEIGHT - Maruo.HEIGHT
-                , Math.random() * -5 - 1
-                , Math.random() * -5 - 1
-            );
-
-            maruo.destroyProcess = () => {
-                shareData.maruoDestroyCnt++;
-            }
-            
-            this.cm.add(maruo);
-        }
-
+        
         // 赤まるおを生成
         for (let i = 0; i < 35; i++) {
             let maruoRed = new MaruoRed(
@@ -64,22 +50,45 @@ class CharacterState extends StateBase {
             
             this.cm.add(maruoRed);
         }
-    }
 
-    /**
-     * 描画
-     */
-    draw() {
-        this.cm.draw();
+        // まるおを生成
+        for (let i = 0; i < 45; i++) {
+            let maruo = new Maruo(
+                Math.random() * 1000 + WIDTH 
+                , Math.random() * HEIGHT - Maruo.HEIGHT
+                , Math.random() * -5 - 1
+                , Math.random() * -5 - 1
+            );
+
+            maruo.destroyProcess = () => {
+                shareData.maruoDestroyCnt++;
+            }
+            
+            this.cm.add(maruo);
+        }
+
+        // まるおを生成（スケジューリング）
+        for (let i = 0; i < 10; i++) {
+            let maruo = new Maruo(
+                WIDTH 
+                , (HEIGHT - MaruoRed.HEIGHT) / 2
+                , -10
+                , 0
+            );
+
+            maruo.destroyProcess = () => {
+                shareData.maruoDestroyCnt++;
+            }
+            
+            this.cm.addSchedule(i * 6, maruo);
+        }
     }
 
     /**
      * 状態を更新
      */
     run() {
-        this.cm.run();
-
-        if (this.cm.characterList.length == 0) {
+        if (this.cm.isEmpty()) {
             this.changeState("ResultState");
         }
 

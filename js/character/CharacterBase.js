@@ -15,23 +15,10 @@ class CharacterBase {
         this.elapseFrm = 0;
     }
 
-    draw() {
-        
-    }
-
-    run() {
-
-    }
-
-    leftClick() {
-
-    }
-
-    rightClick() {
-
-    }
-
-    destroyProcess() {
-
-    }
+    // 以下、派生クラスにて必要に応じてオーバーライドするメソッド
+    draw() {}
+    run() {}
+    leftClick() {}
+    rightClick() {}
+    destroyProcess() {}
 }

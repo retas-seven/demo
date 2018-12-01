@@ -16,6 +16,15 @@ class TitleState extends StateBase {
     }
 
     /**
+     * 状態を更新
+     */
+    run() {
+        if (mouse.isLeft || mouse.isRight) {
+            this.changeState("CharacterState");
+        }
+    }
+
+    /**
      * 描画
      */
     draw() {
@@ -25,14 +34,5 @@ class TitleState extends StateBase {
         front.fillText("MARUO Shooting", 155,200);
         front.font = "bold 17px 'Arial'";
         front.fillText("mouse click", 315,350);
-    }
-
-    /**
-     * 状態を更新
-     */
-    run() {
-        if (mouse.isLeft || mouse.isRight) {
-            this.changeState("CharacterState");
-        }
     }
 }

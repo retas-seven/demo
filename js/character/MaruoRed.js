@@ -4,11 +4,11 @@
 class MaruoRed extends CharacterBase {
     /** 使用する画像名（通常） */
     static get NORMAL_IMAGE_NAME() {
-        return ["./img/maruo_red_1.png", "./img/maruo_red_2.png","./img/maruo_red_3.png"];
+        return ["./img/maruo_red_1.png", "./img/maruo_red_2.png", "./img/maruo_red_3.png"];
     }
     /** 使用する画像名（やられ） */
     static get DESTROY_IMAGE_NAME() {
-        return ["./img/maruo_red_yarare.png"];
+        return "./img/maruo_red_yarare.png";
     }
     /** １つの画像を表示するフレーム数 */
     static get DRAW_FRAME() {
@@ -125,7 +125,7 @@ class MaruoRed extends CharacterBase {
             );
         } else if (MaruoRed.STATUS_DESTROY == this.status) {
             front.drawImage(
-                state.im.imageMap.get(MaruoRed.DESTROY_IMAGE_NAME[0])
+                state.im.imageMap.get(MaruoRed.DESTROY_IMAGE_NAME)
                 , this.x
                 , this.y
             );

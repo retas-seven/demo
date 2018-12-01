@@ -31,6 +31,18 @@ class ResultState extends StateBase {
     }
 
     /**
+     * 状態を更新
+     */
+    run() {
+        if (mouse.isLeft) {
+            this.changeState("CharacterState");
+        }
+        if (mouse.isRight) {
+            this.changeState("TitleState");
+        }
+    }
+
+    /**
      * 描画
      */
     draw() {
@@ -62,17 +74,5 @@ class ResultState extends StateBase {
         front.font = "bold 17px 'Arial'";
         front.fillText("left click - RETRY", 60,370);
         front.fillText("right click - TITLE", 515,370);
-    }
-
-    /**
-     * 状態を更新
-     */
-    run() {
-        if (mouse.isLeft) {
-            this.changeState("CharacterState");
-        }
-        if (mouse.isRight) {
-            this.changeState("TitleState");
-        }
     }
 }
